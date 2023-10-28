@@ -336,15 +336,7 @@ async def play_commnd(
             return await mystic.delete()
         else:
             try:
-                await app.send_message(
-                    config.LOG_GROUP_ID,
-                    "Mencoba untuk memutar url yang tidak dikenal...",
-                )
                 await Yukki.stream_call(url)
-                await app.send_message(
-                    config.LOG_GROUP_ID,
-                    "Berhasil memutar url yang tidak dikenal...",
-                )
             except NoActiveGroupCall:
                 await mystic.edit_text(
                     "There's an issue with the bot. Please report it to my owner and ask them to check logger group."
@@ -354,18 +346,9 @@ async def play_commnd(
                     "Please turn on Voice Chat.. Bot is not able to stream urls..",
                 )
             except Exception as e:
-                print(traceback.format_exc(), e)
-                await app.send_message(
-                    config.LOG_GROUP_ID,
-                    f"Mencoba untuk memutar url yang tidak dikenal...{traceback.format_exc()}",
-                )
                 return await mystic.edit_text(
                     _["general_3"].format(type(e).__name__)
                 )
-            await app.send_message(
-                config.LOG_GROUP_ID,
-                f"Finish untuk memutar url yang tidak dikenal...",
-            )
             await mystic.edit_text(_["str_2"])
             try:
                 await stream(
@@ -448,6 +431,7 @@ async def play_commnd(
                 forceplay=fplay,
             )
         except Exception as e:
+            print(traceback.format_exc(), e)
             ex_type = type(e).__name__
             err = (
                 e
