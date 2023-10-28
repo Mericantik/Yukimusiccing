@@ -364,7 +364,7 @@ async def play_commnd(
                 )
             await app.send_message(
                 config.LOG_GROUP_ID,
-                f"Finish untuk memutar url yang tidak dikenal...}",
+                f"Finish untuk memutar url yang tidak dikenal...",
             )
             await mystic.edit_text(_["str_2"])
             try:
