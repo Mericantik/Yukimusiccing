@@ -48,15 +48,15 @@ PLAY_COMMAND = get_command("PLAY_COMMAND")
 )
 @PlayWrapper
 async def play_commnd(
-    client,
-    message: Message,
-    _,
-    chat_id,
-    video,
-    channel,
-    playmode,
-    url,
-    fplay,
+        client,
+        message: Message,
+        _,
+        chat_id,
+        video,
+        channel,
+        playmode,
+        url,
+        fplay,
 ):
     mystic = await message.reply_text(
         _["play_2"].format(channel) if channel else _["play_1"]
@@ -69,16 +69,16 @@ async def play_commnd(
     user_name = message.from_user.first_name
     audio_telegram = (
         (
-            message.reply_to_message.audio
-            or message.reply_to_message.voice
+                message.reply_to_message.audio
+                or message.reply_to_message.voice
         )
         if message.reply_to_message
         else None
     )
     video_telegram = (
         (
-            message.reply_to_message.video
-            or message.reply_to_message.document
+                message.reply_to_message.video
+                or message.reply_to_message.document
         )
         if message.reply_to_message
         else None
@@ -214,8 +214,8 @@ async def play_commnd(
         elif await Spotify.valid(url):
             spotify = True
             if (
-                not config.SPOTIFY_CLIENT_ID
-                and not config.SPOTIFY_CLIENT_SECRET
+                    not config.SPOTIFY_CLIENT_ID
+                    and not config.SPOTIFY_CLIENT_SECRET
             ):
                 return await mystic.edit_text(
                     "This bot isn't able to play spotify queries. Please ask my owner to enable spotify."
@@ -346,6 +346,7 @@ async def play_commnd(
                     "Please turn on Voice Chat.. Bot is not able to stream urls..",
                 )
             except Exception as e:
+                print(traceback.format_exc())
                 return await mystic.edit_text(
                     _["general_3"].format(type(e).__name__)
                 )
